@@ -19,4 +19,14 @@ for(step_size in step_size_vector){
     }
   sd_vector=c(sd_vector, sd(displacement_vector))
 }
-plot(step_size_vector, sd_vector)
+best_fit_line = lm(log(sd_vector)~log(step_size_vector))
+best_fit_line #returns the following
+#   Call:
+#   lm(formula = log(sd_vector) ~ log(step_size_vector))
+#
+#   Coefficients:
+#     (Intercept)  log(step_size_vector)  
+#     -0.7912                 0.5030
+plot(log(step_size_vector), log(sd_vector), xlab="log(step_size)", ylab ="log(sd_vector)", xlim = c(0, 10), ylim = c(0,3))
+par(new = TRUE)
+curve((-0.7912+0.5030*x), xlab = " ", ylab = " ", xlim = c(0, 10), ylim = c(0,3))
